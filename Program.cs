@@ -13,28 +13,43 @@ namespace DotNetConsoleApp1
             try
             {
                 this.input_number = System.Int64.Parse(input == null ? "" : input);
+
+                if (this.input_number != this.input_number%100)
+                {
+                    this.GetInputDigit(this.ReverseNumber(this.input_number));
+                }
+
+                else
+                {
+                    System.Console.WriteLine("Input number {0} has an incorrect format (needed at least to be more or equal 3 digits)", this.input_number);
+                }
             }
 
             catch(System.FormatException ex)
             {
                 System.Console.WriteLine("Format error ocorrupted.");
             }
+        }
 
-            System.Console.Clear();
-            this.GetInputDigit(this.input_number);
+        private Int64 ReverseNumber(Int64 num)
+        {
+            Int64 reversed = 0;
+            while (num > 0)
+            {
+                reversed *= 10;
+                reversed += num % 10;
+                num /= 10;
+            }
+            return reversed;
         }
 
         private void GetInputDigit(Int64 num)
         {
-            if (num > 0)
+            if ((num /= 10) > 0)
             {
-                num /= 10;
-                ++this.digit_size;
-
-                if (this.digit_size == 1)
-                {
-                    //System.Console.WriteLine("Digit size from {0} is {1} on value {2}/{3}", this.input_number, this.digit_size, num, ((num%10)%10));
-                    System.Console.WriteLine("The second digit value {0}", ((num%10)%10));
+                if (2 == ++this.digit_size)
+                {       
+                    System.Console.WriteLine("The third digit value {0}", num%10);
                     return;
                 }
 
@@ -48,7 +63,7 @@ namespace DotNetConsoleApp1
         public static void Main(string[] args)
         {
             System.Console.Clear();
-            System.Console.WriteLine("Input your number (3 digits format):");
+            System.Console.WriteLine("Input your number (anyway digits format/no zero beginning):");
             new MainApp(System.Console.ReadLine());
             System.Console.WriteLine();
         }
