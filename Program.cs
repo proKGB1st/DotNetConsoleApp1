@@ -4,7 +4,11 @@ namespace DotNetConsoleApp1
 {
     class Program
     {
-        public static void Main(string[] args)
+        private Int64 input_number;
+        private Int64 reversed_number;
+        private Int64 digit_size = 0;
+
+        public MainApp(string? input)
         {
             System.Console.Clear();
             System.Console.WriteLine("Input your number (from 1 to 7):");
@@ -15,19 +19,71 @@ namespace DotNetConsoleApp1
             {
                 Int16 input_value = System.Int16.Parse(System.Console.ReadLine());
 
-                if (input_value > 7 || input_value < 1)
+                this.GetInputDigit(this.input_number);
+                
+                if (5 <= this.digit_size)
                 {
-                    System.Console.WriteLine("Format error ocorrupted.");
-                    return;
+                    this.ReverseNumber(this.input_number);
+
+                    System.Console.WriteLine(
+                        "Input number{0} palindrome!", 
+                        this.reversed_number == this.input_number ? "'s" : " isn't "
+                    );
                 }
                 
-                System.Console.WriteLine("Is holiday? {0}", (((mask >> (input_value - 1)) & mask) != 0x0 ? "False" : "True"));
+                else
+                {
+                    System.Console.WriteLine(
+                        "Input number {0} has an incorrect format (needed at least to be more or equal 5 digits)", 
+                        this.input_number
+                    );
+                }
             }
 
             catch(System.FormatException ex)
             {
                 System.Console.WriteLine("Format error ocorrupted.");
             }
+        }
+
+        private void ReverseNumber(Int64 num)
+        {
+            this.reversed_number = 0;
+            
+            while (num > 0)
+            {
+                this.reversed_number *= 10;
+                this.reversed_number += num % 10;
+                num /= 10;
+            }
+        }
+
+        private void GetInputDigit(Int64 num)
+        {
+            if ((num /= 10) > 0)
+            {
+                ++this.digit_size;
+                GetInputDigit(num);
+            }
+
+            else if (this.input_number % 10 > 0)
+            {
+                ++this.digit_size;
+            }
+        }
+    }
+
+    class Program
+    {
+        public static string Task = "Напишите программу, \nкоторая принимает на вход пятизначное число и проверяет, \nявляется ли оно палиндромом.\n";
+        
+        public static void Main(string[] args)
+        {
+            System.Console.Clear();
+            System.Console.WriteLine(Task);
+            System.Console.WriteLine("Input your number (anyway digits format/no zero beginning):");
+            new MainApp(System.Console.ReadLine());
+            System.Console.WriteLine();
         }
     }
 }
