@@ -4,7 +4,7 @@ namespace DotNetConsoleApp1
 {
     class Program
     {
-        public static string Task = "Задача 34: Задайте массив заполненный случайными положительными трёхзначными числами. Напишите программу, которая покажет количество чётных чисел в массиве.\n";
+        public static string Task = "Задача 36: Задайте одномерный массив, заполненный случайными числами. Найдите сумму элементов, стоящих на нечётных позициях.\n";
 
         public static void Main(string[] args)
         {
@@ -20,11 +20,11 @@ namespace DotNetConsoleApp1
                 arr[i] = rg.Next(0, 999);
             }
 
-            int counter = 0;
+            int sum = 0;
 
             foreach (int val in arr)
             {
-                if (0 == val%2)
+                if (0 != val%2)
                 {
                     counter++;
                 }
