@@ -26,11 +26,11 @@ namespace DotNetConsoleApp1
             {
                 if (0 != val%2)
                 {
-                    counter++;
+                    sum += val;
                 }
             }
 
-            System.Console.Write("{0} ", counter);
+            System.Console.Write("Sum: {0} ", sum);
         }
     }
 }
