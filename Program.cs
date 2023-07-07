@@ -4,7 +4,7 @@ namespace DotNetConsoleApp1
 {
     class Program
     {
-        public static string Task = "Задача 25: Напишите цикл, который принимает на вход два числа (A и B) и возводит число A в натуральную степень B.\n";
+        public static string Task = "Задача 27: Напишите программу, которая принимает на вход число и выдаёт сумму цифр в числе.\n";
 
         public static void Main(string[] args)
         {
@@ -12,15 +12,11 @@ namespace DotNetConsoleApp1
             System.Console.WriteLine(Task);
             
             int num = 0;
-            int deg = 0;
 
             try
             {
                 System.Console.WriteLine("Input your number:");
                 num = (int) System.Int64.Parse(System.Console.ReadLine());
-
-                System.Console.WriteLine("Input degree value:");
-                deg = (int) System.Int64.Parse(System.Console.ReadLine());
             }
 
             catch(System.FormatException ex)
@@ -28,15 +24,15 @@ namespace DotNetConsoleApp1
                 System.Console.WriteLine("Format error ocorrupted.");
             }
 
-            // System.Console.WriteLine("\nYour number's: {0} -> {1}", num, deg);
-            int res = num;
+            int sum = 0;
 
-            for (int i = 1; i < deg; ++i)
+            while(num > 0)
             {
-                res *= num;
+                sum += num % 10;
+                num /= 10;
             }
 
-            System.Console.WriteLine("Result's: {0}", res);
+            System.Console.WriteLine("Value: {0}", sum);
         }
     }
 }
