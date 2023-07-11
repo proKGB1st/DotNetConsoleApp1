@@ -4,31 +4,38 @@ namespace DotNetConsoleApp1
 {
     class Program
     {
-        public static string Task = "Задача 38: Задайте массив вещественных чисел. Найдите разницу между максимальным и минимальным элементов массива.\n";
-        
-        static float NextFloat(Random rand)
-        {
-            double val = rand.NextDouble();
-            val -= 0.5;
-            val *= 2;
-            return float.MaxValue * (float) val;
-        }
-        
+        public static string Task = "Задача 41: Пользователь вводит с клавиатуры M чисел. \nПосчитайте, сколько чисел больше 0 ввёл пользователь.\n";
+
         public static void Main(string[] args)
         {
             System.Console.Clear();
             System.Console.WriteLine(Task);
-
-            Random rg = new Random();
             
-            double[] arr = new double[rg.Next(0, 64)];
+            Int64 val = 0;
+            Int64 counter = 0;
 
-            for (int i = 0; i < arr.Length; i++)
+            while (true)
             {
-                arr[i] = NextFloat(rg);
-            }
+                string input = System.Console.ReadLine();
 
-            System.Console.Write("Min: {0}, Max: {1} => {2}", arr.Min(), arr.Max(), (arr.Max() - arr.Min()));
+                try
+                {
+                    val = System.Int64.Parse(input);
+
+                    if (true == val > 0)
+                    {
+                        counter++;
+                    }
+
+                    System.Console.WriteLine("Sum of values are more than zero: {0}\n", counter);
+                }
+
+                catch(System.FormatException ex)
+                {
+                    System.Console.WriteLine("\nFormat error ocorrupted.");
+                    break;
+                }
+            }
         }
     }
 }
