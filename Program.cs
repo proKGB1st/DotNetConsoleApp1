@@ -4,41 +4,41 @@ namespace DotNetConsoleApp1
 {
     class Program
     {
-        public static string Task = "Задача 43: Напишите программу, которая найдёт точку пересечения двух прямых, заданных уравнениями.\n";
+        public static string Task = "Задача 47.\n Задайте двумерный массив размером m×n,\n заполненный случайными вещественными числами\n";
 
         public static void Main(string[] args)
         {
-            System.Console.Clear();
-            System.Console.WriteLine(Task);
+            Console.Clear();
+            Console.WriteLine(Task);
 
             try
             {
-                System.Console.WriteLine("Input k1:");
-                Int64 k1 = 0;
-                k1 = System.Int64.Parse(System.Console.ReadLine());
+                Console.Write("Input M: ");
+                uint m = Convert.ToUInt32(Console.ReadLine());
 
-                System.Console.WriteLine("Input b1:");
-                Int64 b1 = 0;
-                b1 = System.Int64.Parse(System.Console.ReadLine());
+                Console.Write("Input N: ");
+                uint n = Convert.ToUInt32(Console.ReadLine());
 
-                System.Console.WriteLine("Input k2:");
-                Int64 k2 = 0;
-                k2 = System.Int64.Parse(System.Console.ReadLine());
+                uint[,] a = new uint[m,n];
 
-                System.Console.WriteLine("Input b2:");
-                Int64 b2 = 0;
-                b2 = System.Int64.Parse(System.Console.ReadLine());
-                
-                Int64 k = k1-k2;
-                Int64 x = k/(b1-b2);
-                Int64 y = k2*x+b2;
+                Random r = new Random();
 
-                System.Console.WriteLine("Cross point: ({0};{1})", x, y);
+                for (uint x = 0; x < m; x++)
+                {
+                    for (uint y = 0; y < n; y++)
+                    {
+                        a[x, y] = (uint) (r.Next(Int32.MinValue, Int32.MaxValue) + (uint)Int32.MaxValue);
+
+                        Console.WriteLine("\tМассив a[{0},{1}] = {2}", x, y, a[x, y]);
+                    }
+
+                    Console.WriteLine("\n");
+                }
             }
 
-            catch(System.FormatException ex)
+            catch (System.FormatException ex)
             {
-                System.Console.WriteLine("Format error ocorrupted.");
+                Console.WriteLine("Format error occorupted!\n\n");
             }
 
         }
