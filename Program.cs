@@ -4,7 +4,7 @@ namespace DotNetConsoleApp1
 {
     class Program
     {
-        public static string Task = "Задача 47.\n Задайте двумерный массив размером m×n,\n заполненный случайными вещественными числами\n";
+        public static string Task = "Задача 52.\n Задайте двумерный массив из целых чисел.\n Найдите среднее арифметическое элементов в каждом столбце\n";
 
         public static void Main(string[] args)
         {
@@ -27,12 +27,28 @@ namespace DotNetConsoleApp1
                 {
                     for (uint y = 0; y < n; y++)
                     {
-                        a[x, y] = (uint) (r.Next(Int32.MinValue, Int32.MaxValue) + (uint)Int32.MaxValue);
+                        a[x, y] = (uint) (r.Next(Int32.MinValue, Int32.MaxValue) + (uint) Int32.MaxValue);
 
                         Console.WriteLine("\tМассив a[{0},{1}] = {2}", x, y, a[x, y]);
                     }
 
-                    Console.WriteLine("\n");
+                    Console.Write("\n");
+                }
+
+                Console.WriteLine("=====================================\n");
+
+                for (uint x = 0; x < n; x++)
+                {
+                    uint mean_col = 0;
+
+                    for (uint y = 0; y < m; y++)
+                    {
+                        mean_col += a[y, x];
+
+                        Console.WriteLine("\tМассив a[{0},{1}] = {2}", x, y, a[y, x]);
+                    }
+
+                    Console.WriteLine("\n\t  >>> Среденее: {0}\n", (float) mean_col/m);
                 }
             }
 
