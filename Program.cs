@@ -4,34 +4,7 @@ namespace DotNetConsoleApp1
 {
     class Program
     {
-        public static string Task = "Задача 58: \n\nЗадайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.\n";
-
-        // метод для умножения матриц
-        static uint[,] GetMatrix(uint num)
-        {
-            uint m = num;
-            uint n = num;
-
-            uint[,] a = new uint[m, n];
-
-            Random r = new Random();
-
-            Console.Write("\n== Input =====================\n\n");
-
-            for (uint x = 0; x < m; x++)
-            {
-                for (uint y = 0; y < n; y++)
-                {
-                    a[x, y] = (uint)r.Next(0, 8);
-                    
-                    Console.WriteLine("\tМассив a[{0},{1}] = {2}", x, y, a[x, y]);
-                }
-
-                Console.Write("\n");
-            }
-
-            return a;
-        }
+        public static string Task = "Задача 60. \n\nСформируйте трёхмерный массив из неповторяющихся двузначных чисел. \nНапишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента. \nМассив размером 2x2x2\n";
 
         public static void Main(string[] args)
         {
@@ -42,33 +15,37 @@ namespace DotNetConsoleApp1
             {
                 Console.Write("Input matrix size: ");
 
-                uint size = Convert.ToUInt32(Console.ReadLine());
+                int size = Convert.ToInt32(Console.ReadLine());
 
-                uint[,] a = GetMatrix(size);
-                uint[,] b = GetMatrix(size);
+                int[,,] r = new int[size, size, size];
 
-                uint[,] r = new uint[size, size];
+                int val = 10;
 
-                for (var i = 0; i < size; i++)
+                for(int i = 0; i < size; i++)
                 {
-                    for (var j = 0; j < size; j++)
-                    {
-                        r[i, j] = 0;
+                    val += i;
 
-                        for (var k = 0; k < size; k++)
+                    for(int j = 0; j < size; j++)
+                    {
+                        val += j;
+
+                        for (int k = 0; k < size; k++)
                         {
-                            r[i, j] += a[i, k] * b[k, j];
+                            r[i, j, k] = val + k;
                         }
-                    }
+                    } 
                 }
 
                 Console.Write("\n== Print =====================\n\n");
 
-                for (uint x = 0; x < size; x++)
+                for (int x = 0; x < size; x++)
                 {
-                    for (uint y = 0; y < size; y++)
+                    for (int y = 0; y < size; y++)
                     {
-                        Console.WriteLine("\tМассив r[{0},{1}] = {2}", x, y, r[x, y]);
+                        for (int z = 0; z < size; z++)
+                        {
+                            Console.WriteLine("\tМассив a[{0},{1},{2}] = {3}", x, y, z, r[x, y, z]);
+                        }
                     }
 
                     Console.Write("\n");
