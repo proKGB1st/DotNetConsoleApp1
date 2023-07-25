@@ -4,7 +4,7 @@ namespace DotNetConsoleApp1
 {
     class Program
     {
-        public static string Task = "Задача 52.\n Задайте двумерный массив из целых чисел.\n Найдите среднее арифметическое элементов в каждом столбце\n";
+        public static string Task = "Задача 54: Задайте двумерный массив. \nНапишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.\n";
 
         public static void Main(string[] args)
         {
@@ -23,11 +23,14 @@ namespace DotNetConsoleApp1
 
                 Random r = new Random();
 
+                Console.Write("\n== Input =====================\n\n");
+
                 for (uint x = 0; x < m; x++)
                 {
                     for (uint y = 0; y < n; y++)
                     {
-                        a[x, y] = (uint) (r.Next(Int32.MinValue, Int32.MaxValue) + (uint) Int32.MaxValue);
+                        a[x, y] = (uint) r.Next(0, 23);
+                        // a[x, y] = (uint) (r.Next(Int32.MinValue, Int32.MaxValue) + (uint) Int32.MaxValue);
 
                         Console.WriteLine("\tМассив a[{0},{1}] = {2}", x, y, a[x, y]);
                     }
@@ -35,20 +38,35 @@ namespace DotNetConsoleApp1
                     Console.Write("\n");
                 }
 
-                Console.WriteLine("=====================================\n");
+                Console.WriteLine("== Sorting =====================\n");
 
-                for (uint x = 0; x < n; x++)
+                for (uint x = 0; x < m; x++)
                 {
-                    uint mean_col = 0;
+                    uint temp;
 
-                    for (uint y = 0; y < m; y++)
+                    for (uint y = 0; y < n; y++)
                     {
-                        mean_col += a[y, x];
+                        for (uint z = 0; z < n; z++)
+                        {
+                            if (a[x,y] > a[x,z])
+                            {
+                                temp = a[x,y];
+                                a[x,y] = a[x,z];
+                                a[x,z] = temp;
+                            }
+                        }
+                    }
+                }
 
-                        Console.WriteLine("\tМассив a[{0},{1}] = {2}", x, y, a[y, x]);
+                for (uint x = 0; x < m; x++)
+                {
+                    for (uint y = 0; y < n; y++)
+                    {
+
+                        Console.WriteLine("\tМассив a[{0},{1}] = {2}", x, y, a[x, y]);
                     }
 
-                    Console.WriteLine("\n\t  >>> Среденее: {0}\n", (float) mean_col/m);
+                    Console.Write("\n");
                 }
             }
 
