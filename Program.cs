@@ -4,57 +4,78 @@ namespace DotNetConsoleApp1
 {
     class Program
     {
-        public static string Task = "Задача 60. \n\nСформируйте трёхмерный массив из неповторяющихся двузначных чисел. \nНапишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента. \nМассив размером 2x2x2\n";
+        public static string Task = "Задача 62. \nНапишите программу, которая заполнит спирально массив 4x4.\n";
 
         public static void Main(string[] args)
         {
             Console.Clear();
             Console.WriteLine(Task);
 
-            try
+            int size = 4;
+
+            int[,] r = new int[size, size];
+            
+            int len = (int)Math.Pow(size, 2);
+
+            int count = 0;
+
+            // Заполнили самую первый элемент массива
+            for (int j = 0; j < size; j++)
             {
-                Console.Write("Input matrix size: ");
-
-                int size = Convert.ToInt32(Console.ReadLine());
-
-                int[,,] r = new int[size, size, size];
-
-                int val = 10;
-
-                for(int i = 0; i < size; i++)
-                {
-                    val += i;
-
-                    for(int j = 0; j < size; j++)
-                    {
-                        val += j;
-
-                        for (int k = 0; k < size; k++)
-                        {
-                            r[i, j, k] = val + k;
-                        }
-                    } 
-                }
-
-                Console.Write("\n== Print =====================\n\n");
-
-                for (int x = 0; x < size; x++)
-                {
-                    for (int y = 0; y < size; y++)
-                    {
-                        for (int z = 0; z < size; z++)
-                        {
-                            Console.WriteLine("\tМассив a[{0},{1},{2}] = {3}", x, y, z, r[x, y, z]);
-                        }
-                    }
-
-                    Console.Write("\n");
-                }
+                r[0, j] = ++count;
             }
 
-            catch (FormatException ex)
+            // Реализация алгоритма Улитка"
+            // Источник: https://mob25.com/zapolnenie-matricy-po-spirali-v-python/
+
+            // Наблюдаемый последний элемент
+            int latest = 0;
+
+            // Рабочая ячейка
+            int i = size-1;
+
+            // Размер витка
+            --size;
+
+            // Рекурсивный-реверсивный алгоритм
+            // 
+            // Учитывая, что первая строка заполняется слева-направо,
+            // постепенное движение будет происходить по следующему статическому алгоритму (→ ↓ ← ↑)
+
+            while (len != count)
             {
-                Console.WriteLine("Format error occorupted!\n\n");
+                // ↓
+                for (int j = 0; j < size; ++j)
+                    r[++latest, i] = ++count;
+
+                // ←
+                for (int j = 0; j < size; ++j)
+                    r[latest, --i] = ++count;
+
+                // ↑
+                for (int j = 0; j < size-1; ++j)
+                    r[--latest, i] = ++count;
+
+                // →
+                for (int j = 0; j < size-1; ++j)
+                    r[latest, ++i] = ++count;
+
+                // Переходим на внутренний виток
+                size -= 2;
+            }
+
+            Console.Write("== Print =====================\n\n");
+
+            for (int x = 0; x < 4; x++)
+            {
+                for (int y = 0; y < 4; y++)
+                {
+                    int val = r[x, y];
+
+                    Console.Write("{0} {1}", (val <= 9 ? " " : ""), val);
+                }
+
+                Console.Write("\n");
             }
         }
     }
