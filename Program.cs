@@ -4,17 +4,29 @@ namespace DotNetConsoleApp1
 {
     class Program
     {
-        public static string Task = "Задача 66.\nЗадайте значения M и N.\nНапишите программу, которая найдёт сумму натуральных элементов в промежутке от M до N.\n";
+        public static string Task = "Задача 68.\nНапишите программу вычисления функции Аккермана с помощью рекурсии.\nДаны два неотрицательных числа m и n.\n";
 
-        public static uint PrintNumbers(uint c, uint m, uint n)
+        // Описание алгоритма вычислительной функции Аккермана:
+        // https://ru.wikipedia.org/wiki/Функция_Аккермана#Реализация
+
+        public static uint Akkerman(uint m, uint n)
         {
-            if (n > c)
+            if (m == 0)
             {
-                m += n--;
-                m = PrintNumbers(c, m, n);
+                return n + 1;
+            } 
+
+            else if (n == 0)
+            {
+                return Akkerman(m-1, 1);
             }
 
-            return m;
+            else
+            {
+                return Akkerman(m-1, Akkerman(m, n-1));
+            }
+
+            return 0;
         }
 
         public static void Main(string[] args)
@@ -32,17 +44,9 @@ namespace DotNetConsoleApp1
 
                 Console.Write("Input N value: ");
                 n = Convert.ToUInt32(Console.ReadLine());
-
-                if (m > n)
-                {
-                    uint t = m;
-
-                    n = m;
-                    m = t;
-                }
-
-                uint sum = PrintNumbers(m, m, n);
-                Console.Write($"The numbers in: {m} and {n}. Sum's: {sum}");
+                
+                uint akk_res = Akkerman(m, n);
+                Console.Write($"The numbers in: {m} and {n}. Akkerman result: {akk_res}");
             }
 
             catch (FormatException ex)
